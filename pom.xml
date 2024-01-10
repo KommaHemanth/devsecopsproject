@@ -315,3 +315,5 @@
       </configuration>
     </plugin>
 <!-- Snyk Changes for SCA Ends Here -->
+	</build>
+</project>
