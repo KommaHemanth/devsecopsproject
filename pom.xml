@@ -11,6 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<easybuggy-port>8080</easybuggy-port>
+		
 		<jvm.args.perm.size>-XX:MaxPermSize=128m</jvm.args.perm.size>
 		<jvm.args.gc.log.path>-Xloggc:logs/gc.log</jvm.args.gc.log.path>
 		<jvm.args.print.heap.at.gc>-XX:+PrintHeapAtGC</jvm.args.print.heap.at.gc>
@@ -40,6 +41,7 @@
 			<properties>
 				<jvm.args.perm.size>-XX:MaxMetaspaceSize=128m</jvm.args.perm.size>
 				<jvm.args.gc.log.path>-Xlog:gc*:logs/gc_%p_%t.log:time,level,tags:filecount=5,filesize=10M</jvm.args.gc.log.path>
+				
 				<jvm.args.print.heap.at.gc>-Dummy=Dummy</jvm.args.print.heap.at.gc>
 				<jvm.args.print.gc.details>-Dummy=Dummy</jvm.args.print.gc.details>
 				<jvm.args.print.gc.date.stamps>-Dummy=Dummy</jvm.args.print.gc.date.stamps>
@@ -49,6 +51,7 @@
 			</properties>
 		</profile>
 	</profiles>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -124,6 +127,7 @@
 			<version>1.5.1</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -166,6 +170,7 @@
    <version>6.1.6</version>
    <configuration>
       <format>ALL</format>
+      
    </configuration>
 </plugin>
 			<plugin>
@@ -250,6 +255,7 @@
 								<argument>-XX:+HeapDumpOnOutOfMemoryError</argument>
 								<argument>-XX:HeapDumpPath=logs/</argument>
 								<argument>-XX:ErrorFile=logs/hs_err_pid%p.log</argument>
+								
 								<argument>-agentlib:jdwp=transport=dt_socket,server=y,address=9009,suspend=n</argument>
 								<argument>-Dderby.stream.error.file=logs/derby.log</argument>
 								<argument>-Dderby.infolog.append=true</argument>
@@ -261,6 +267,7 @@
 								<argument>-Dcom.sun.management.jmxremote.port=7900</argument>
 								<argument>-Dcom.sun.management.jmxremote.ssl=false</argument>
 								<argument>-Dcom.sun.management.jmxremote.authenticate=false</argument>
+								
 								<argument>-ea</argument>
 								<argument>-jar</argument>
 								<argument>target/easybuggy.jar</argument>
@@ -270,14 +277,47 @@
 					</execution>
 				</executions>
 			</plugin>
+
     <plugin>
       <groupId>io.snyk</groupId>
       <artifactId>snyk-maven-plugin</artifactId>
       <version>2.0.0</version>
       <inherited>false</inherited>
       <configuration>
-        <org>kommahemanth</org>
+        <org>asecurityguru</org>
       </configuration>
     </plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-antrun-plugin
+										</artifactId>
+										<versionRange>[1.3,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
